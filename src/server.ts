@@ -58,7 +58,7 @@ app.get("/calculator", (req, res) => {
   res.sendFile(__dirname + "/public/calculator.html")
 })
 
-app.use(express.static("src/public"));
+app.use(express.static(__dirname + "/public"));
 
 
 export default app;

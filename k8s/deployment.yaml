@@ -13,6 +13,10 @@ spec:
       labels:
         app: circle-calculator
     spec:
+      initContainers:
+      - name: wait-for-mysql
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nc -z mysql-service.circle-calc.svc.cluster.local 3306; do echo waiting for mysql; sleep 2; done']
       containers:
       - name: circle-calculator
         image: syadzaarrana/circle-calculator:latest
@@ -22,16 +26,8 @@ spec:
         envFrom:
         - configMapRef:
             name: app-config
-        env:
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: DB_PASSWORD
-        initContainers:
-        - name: wait-for-mysql
-          image: busybox:1.28
-          command: ['sh', '-c', 'until nc -z mysql-service.circle-calc.svc.cluster.local 3306; do echo waiting for mysql; sleep 2; done']
+        - secretRef:
+            name: db-secret
         resources:
           requests:
             memory: "256Mi"
@@ -39,15 +35,4 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 5
+            

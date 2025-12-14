@@ -10,3 +10,4 @@ data:
   DB_USER: "appuser"
   DB_NAME: "circle_calc"
   DB_PORT: "3306"
+  SESSION_SECRET: "your-secret-key-change-this-in-production"
