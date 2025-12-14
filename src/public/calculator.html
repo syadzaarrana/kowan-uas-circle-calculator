@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculator.css">
+</head>
+<body>
+<div class="calculator-container">
+    <!-- Header -->
+    <header class="header">
+        <h1>Circle Calculator</h1>
+        <div class="header-right">
+            <span class="username" id="username"></span>
+            <button id="logoutButton" class="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Wrapped calculators and history in a main flex container for side-by-side layout -->
+        <div class="main-layout">
+            <!-- Calculators Section -->
+            <div class="calculators-section">
+                <!-- Circle Area Calculator -->
+                <div class="calculator-card">
+                    <h2>Circle Area</h2>
+                    <p class="description">Calculate the area of a circle</p>
+                    <div class="input-group">
+                        <label for="radiusArea">Radius:</label>
+                        <input type="number" id="radiusArea" placeholder="Enter radius" min="0" step="0.01">
+                        <span class="unit">units</span>
+                    </div>
+                    <button class="calculate-btn" onclick="calculateArea()">Calculate Area</button>
+                    <div class="result" id="areaResult"></div>
+                </div>
+
+                <!-- Circle Circumference Calculator -->
+                <div class="calculator-card">
+                    <h2>Circle Circumference</h2>
+                    <p class="description">Calculate the circumference of a circle</p>
+                    <div class="input-group">
+                        <label for="radiusCircumference">Radius:</label>
+                        <input type="number" id="radiusCircumference" placeholder="Enter radius" min="0" step="0.01">
+                        <span class="unit">units</span>
+                    </div>
+                    <button class="calculate-btn" onclick="calculateCircumference()">Calculate Circumference</button>
+                    <div class="result" id="circumferenceResult"></div>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <div class="history-section">
+                <h2>Calculation History</h2>
+                <div class="history-list" id="historyList">
+                    <p class="empty-message">No calculations yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/calculator.js"></script>
+</body>
+</html>
