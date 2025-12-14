@@ -46,7 +46,18 @@ if (process.env.NODE_ENV === 'development' || config.NODE_ENV === 'development')
 
 // Handle security and origin in production
 if (process.env.NODE_ENV === 'production' || config.NODE_ENV === 'production') {
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          styleSrc: ["'self'", "'unsafe-inline'"],
+          scriptSrc: ["'self'", "'unsafe-inline'", "https://unpkg.com"],
+          imgSrc: ["'self'", "data:"],
+        },
+      },
+    })
+  );
 }
 
 /************************************************************************************
